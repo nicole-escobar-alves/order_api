@@ -14,14 +14,14 @@ import java.math.BigDecimal;
 public class AddonEntity extends EntityBase {
 
     @Column(nullable = false)
-    private String name;
+    public String name;
 
     @Column(nullable = false)
-    private BigDecimal price;
+    public BigDecimal price;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private ProductCategory productCategory;
+    public ProductCategory productCategory;
 
-    private BigDecimal discountPercent;
+    public BigDecimal discountPercent;
 }

@@ -1,6 +1,5 @@
 package br.com.postech.techchallenge.order_api.models;
 
-import br.com.postech.techchallenge.order_api.dto.product.UpdateProductDto;
 import br.com.postech.techchallenge.order_api.enums.ProductCategory;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

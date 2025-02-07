@@ -5,14 +5,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
-
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Addon extends BaseDomain {
-    private String name;
-    private BigDecimal price = BigDecimal.ZERO;
-    private ProductCategory productCategory;
-    private Double discountPercent = 0.0;
+    public String name;
+    public BigDecimal price = BigDecimal.ZERO;
+    public Double discountPercent = 0.0;
+    public ProductCategory productCategory;
 
     public void update(String name, BigDecimal price, Double discountPercent) {
         this.name = name;

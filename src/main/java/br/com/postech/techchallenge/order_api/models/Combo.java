@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Getter
@@ -18,7 +17,6 @@ public class Combo extends BaseDomain {
     private Product product;
     private List<Addon> addons = new ArrayList<>();
     private BigDecimal totalPrice = BigDecimal.ZERO;
-
 
 
 }
