@@ -3,8 +3,6 @@ package br.com.postech.techchallenge.order_api.dto.addon;
 import br.com.postech.techchallenge.order_api.enums.ProductCategory;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 

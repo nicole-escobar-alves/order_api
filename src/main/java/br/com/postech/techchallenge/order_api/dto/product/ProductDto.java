@@ -13,6 +13,6 @@ public class ProductDto {
     private String description;
     private BigDecimal price;
     private Double discountPercent;
-    private String productCategory;
+    private String productCategoryName;
 }
 

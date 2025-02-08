@@ -13,10 +13,42 @@ import java.math.BigDecimal;
 public class UpdateAddonDto {
     @NotBlank
     private String name;
+
     @NotNull
     private BigDecimal price;
     @NotNull
     private ProductCategory productCategory;
     @NotNull
     private Double discountPercent;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+    }
+
+    public Double getDiscountPercent() {
+        return discountPercent;
+    }
+
+    public void setDiscountPercent(Double discountPercent) {
+        this.discountPercent = discountPercent;
+    }
 }

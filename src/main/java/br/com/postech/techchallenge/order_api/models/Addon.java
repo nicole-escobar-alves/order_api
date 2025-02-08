@@ -1,12 +1,13 @@
 package br.com.postech.techchallenge.order_api.models;
 
 import br.com.postech.techchallenge.order_api.enums.ProductCategory;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
-@Data
-@EqualsAndHashCode(callSuper = true)
+
+@Getter
+@Setter
 public class Addon extends BaseDomain {
     public String name;
     public BigDecimal price = BigDecimal.ZERO;

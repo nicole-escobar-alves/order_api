@@ -20,4 +20,6 @@ public interface IProductJpaRepository extends IJpaRepositoryBase<ProductEntity>
     @Modifying
     @Query("UPDATE ProductEntity p SET p.isActive = false WHERE p.id = :id")
     void deleteById(@NonNull @Param("id") Long id);
+
+
 }
