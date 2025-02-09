@@ -30,7 +30,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<ProductDto>> GetAllByProductCategoryName(@RequestParam String categoryName) {
-        var dtos = productService.Find(categoryName);
+        var dtos = productService.FindByName(categoryName);
         return ResponseEntity.ok(dtos);
     }
 

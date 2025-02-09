@@ -40,6 +40,13 @@ public class AddonService {
         return mapper.toAddonListDto(addonsList);
     }
 
+    public Addon FindById(Long id) {
+
+        AddonEntity addonEntity = addonRepository.findById(id).get();
+
+        return mapper.toDomain(addonEntity);
+    }
+
     public void Update(Long id, UpdateAddonDto dto) {
 
         AddonEntity addonEntity = addonRepository.findById(id).get();

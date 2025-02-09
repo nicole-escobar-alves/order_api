@@ -12,7 +12,6 @@ public interface IProductCategoryMapper {
     default String map(ProductCategory productCategory) {
         return productCategory != null ? productCategory.name() : null;
     }
-
     default ProductCategory map(String productCategoryName) {
         return productCategoryName != null ? ProductCategory.valueOf(productCategoryName) : null;
     }

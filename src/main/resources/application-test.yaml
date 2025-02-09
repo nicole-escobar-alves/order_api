@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5455/gestaopedidos_test
+  jpa:
+    hibernate:
+      ddl-auto: update
+

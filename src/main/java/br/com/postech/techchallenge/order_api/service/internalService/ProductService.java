@@ -35,13 +35,20 @@ public class ProductService {
         return productMapper.toProductDto(product);
     }
 
-    public List<ProductDto> Find(String name) {
+    public List<ProductDto> FindByName(String name) {
 
         List<ProductEntity> entities = productRepository.findAllByIsActiveTrueAndProductCategory(ProductCategory.fromDisplayName(name));
 
         List<Product> productDtos = productMapper.toDomains(entities);
 
         return productMapper.toProductListDto(productDtos);
+    }
+
+    public Product FindById(Long id) {
+
+        ProductEntity productEntity = productRepository.findById(id).get();
+
+        return productMapper.toDomain(productEntity);
     }
 
     public void Delete(Long id) throws EntityNotFoundException {
