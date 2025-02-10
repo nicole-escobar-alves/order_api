@@ -1,5 +1,6 @@
 package br.com.postech.techchallenge.order_api.mapper;
 
+import br.com.postech.techchallenge.order_api.dto.order.CreateOrderDto;
 import br.com.postech.techchallenge.order_api.dto.order.DetailsOrderDto;
 import br.com.postech.techchallenge.order_api.dto.order.OrderDto;
 import br.com.postech.techchallenge.order_api.infrastructure.entities.OrderEntity;

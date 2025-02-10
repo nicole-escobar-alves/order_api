@@ -35,6 +35,7 @@ public class OrderService {
     IPaymentApiService paymentService;
 
     public void Create(CreateOrderDto createOrderDto) throws EntityNotFoundException {
+
         Order order = new Order();
 
         for (CreateComboDto comboDto : createOrderDto.getCombos()) {
@@ -48,7 +49,7 @@ public class OrderService {
 
         OrderEntity orderSaved = orderRepository.save(orderMapper.toEntity(order));
 
-        paymentService.Create(orderMapper.toDomain(orderSaved));
+        //paymentService.Create(orderMapper.toDomain(orderSaved));
     }
 
     private void AddCustomerInOrder(Order order, CreateOrderDto createOrderDto) throws EntityNotFoundException {

@@ -1,4 +1,4 @@
-package br.com.postech.techchallenge.order_api.infrastructure.repositories.repositoryTest.entityMock;
+package br.com.postech.techchallenge.order_api.infrastructure.repositories.repositoryTest.repositoryTest.entityMock;
 
 import br.com.postech.techchallenge.order_api.enums.OrderStatus;
 import br.com.postech.techchallenge.order_api.enums.ProductCategory;
@@ -20,7 +20,7 @@ public class OrderRepositoryMock {
         entity.setCombos(combos);
         entity.setTotalPrice(BigDecimal.TEN);
         entity.setOrderStatus(orderStatus);
-        entity.setFinishedTime(LocalDateTime.now().minusSeconds(10));
+        entity.setFinishedTime(LocalDateTime.now().plusMinutes(10));
         entity.setCustomer(customer);
 
         return entity;
@@ -38,10 +38,10 @@ public class OrderRepositoryMock {
 
         return entityList;
     }
-    public static CustomerEntity CreateCustomer() {
+    public static CustomerEntity CreateCustomer(String name, String cpf) {
         CustomerEntity customer = new CustomerEntity();
-        customer.setName("Customer1");
-        customer.setCpf("123.123.123");
+        customer.setName(name);
+        customer.setCpf(cpf);
         customer.setEmail("Customer1@");
 
         return customer;
