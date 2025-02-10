@@ -1,7 +1,7 @@
 package br.com.postech.techchallenge.order_api.infrastructure.repositories;
 
 import br.com.postech.techchallenge.order_api.enums.ProductCategory;
-import br.com.postech.techchallenge.order_api.infrastructure.entities.ProductEntity;
+import br.com.postech.techchallenge.order_api.models.Product;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,14 +11,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IProductJpaRepository extends IJpaRepositoryBase<ProductEntity> {
+public interface IProductJpaRepository extends IJpaRepositoryBase<Product> {
 
-    //Alterar para @SqlRestriction() na entity para não trazer os ativos
-    List<ProductEntity> findAllByIsActiveTrueAndProductCategory(ProductCategory productCategory);
+    List<Product> findAllByIsActiveTrueAndProductCategory(ProductCategory productCategory);
 
     @Override
     @Modifying
-    @Query("UPDATE ProductEntity p SET p.isActive = false WHERE p.id = :id")
+    @Query("UPDATE Product p SET p.isActive = false WHERE p.id = :id")
     void deleteById(@NonNull @Param("id") Long id);
 
 

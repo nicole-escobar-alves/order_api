@@ -2,21 +2,36 @@ package br.com.postech.techchallenge.order_api.models;
 
 import br.com.postech.techchallenge.order_api.dto.product.UpdateProductDto;
 import br.com.postech.techchallenge.order_api.enums.ProductCategory;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.Duration;
 
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+@Table(name = "producties")
 public class Product extends BaseDomain {
 
+    @Column(nullable = false)
     private String name;
     private String description;
+
+    @Column(nullable = false)
     private BigDecimal price = BigDecimal.ZERO;
     private Double discountPercent = 0.0;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private ProductCategory productCategory;
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Duration estimatedTime;
 
     public void update(UpdateProductDto productDto) {
@@ -25,56 +40,7 @@ public class Product extends BaseDomain {
         this.price = productDto.getPrice();
         this.discountPercent = productDto.getDiscountPercent();
     }
-
     public BigDecimal getPriceDiscounted() {
         return price.multiply(BigDecimal.valueOf(1 - discountPercent));
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public Double getDiscountPercent() {
-        return discountPercent;
-    }
-
-    public void setDiscountPercent(Double discountPercent) {
-        this.discountPercent = discountPercent;
-    }
-
-    public ProductCategory getProductCategory() {
-        return productCategory;
-    }
-
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
-    }
-
-    public Duration getEstimatedTime() {
-        return estimatedTime;
-    }
-
-    public void setEstimatedTime(Duration estimatedTime) {
-        this.estimatedTime = estimatedTime;
     }
 }

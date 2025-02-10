@@ -1,30 +1,27 @@
 package br.com.postech.techchallenge.order_api.service.internalService;
 
 import br.com.postech.techchallenge.order_api.dto.combo.CreateComboDto;
-import br.com.postech.techchallenge.order_api.mapper.IComboMapper;
+import br.com.postech.techchallenge.order_api.exception.EntityNotFoundException;
 import br.com.postech.techchallenge.order_api.models.Combo;
-import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class ComboService {
 
-    @Autowired
-    IComboMapper comboMapper;
-    @Autowired
-    ProductService productService;
-    @Autowired
-    AddonService addonService;
+    private final ProductService productService;
 
-    public Combo Create(CreateComboDto comboDto) throws EntityNotFoundException {
+    private final AddonService addonService;
 
-        var product = productService.FindById(comboDto.getProductId());
+    public Combo create(CreateComboDto comboDto) throws EntityNotFoundException {
+
+        var product = productService.findById(comboDto.getProductId());
 
         Combo combo = new Combo(product);
 
         for (Long id : comboDto.getAddonsId()) {
-            combo.AddAddon(addonService.FindById(id));
+            combo.addAddon(addonService.findById(id));
         }
 
         return combo;

@@ -2,9 +2,8 @@ package br.com.postech.techchallenge.order_api.models;
 
 
 import br.com.postech.techchallenge.order_api.enums.OrderStatus;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -15,14 +14,27 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+@Table(name = "orders")
 public class Order extends BaseDomain {
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Combo> combos = new ArrayList<>();
+
+    @Column(nullable = false)
     private BigDecimal totalPrice = BigDecimal.ZERO;
+
+    @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus = OrderStatus.CREATED;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
     private Customer customer;
     private LocalDateTime finishedTime;
 
-    public void AddCombo(Combo combo) {
+    public void addCombo(Combo combo) {
         combos.add(combo);
         increasePrice(combo.getTotalPrice());
     }
@@ -31,7 +43,7 @@ public class Order extends BaseDomain {
         this.totalPrice = totalPrice.add(price);
     }
 
-    public void UpdateOrderStatus(OrderStatus status) {
+    public void updateOrderStatus(OrderStatus status) {
         this.orderStatus = status;
         if (OrderStatus.FINISHED == status)
             updateFinishedTime();

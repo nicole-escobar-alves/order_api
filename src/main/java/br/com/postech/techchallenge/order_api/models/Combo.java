@@ -1,9 +1,11 @@
 package br.com.postech.techchallenge.order_api.models;
 
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -12,9 +14,16 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+@Table(name = "combos")
 public class Combo extends BaseDomain {
 
+    @ManyToOne
     private Product product;
+    @ManyToMany
     private List<Addon> addons = new ArrayList<>();
     private BigDecimal totalPrice = BigDecimal.ZERO;
 
@@ -27,7 +36,7 @@ public class Combo extends BaseDomain {
         increasePrice(product.getPriceDiscounted());
     }
 
-    public void AddAddon(Addon addon) {
+    public void addAddon(Addon addon) {
 
         boolean categoryEquals = product.getProductCategory().equals(addon.getProductCategory());
 

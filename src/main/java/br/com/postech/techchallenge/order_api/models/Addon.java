@@ -1,18 +1,31 @@
 package br.com.postech.techchallenge.order_api.models;
 
 import br.com.postech.techchallenge.order_api.enums.ProductCategory;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "addons")
 public class Addon extends BaseDomain {
-    public String name;
-    public BigDecimal price = BigDecimal.ZERO;
-    public Double discountPercent = 0.0;
-    public ProductCategory productCategory;
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private BigDecimal price = BigDecimal.ZERO;
+
+    private Double discountPercent = 0.0;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ProductCategory productCategory;
 
     public void update(String name, BigDecimal price, Double discountPercent) {
         this.name = name;

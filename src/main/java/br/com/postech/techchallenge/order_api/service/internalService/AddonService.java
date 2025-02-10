@@ -4,62 +4,51 @@ import br.com.postech.techchallenge.order_api.dto.addon.AddonDto;
 import br.com.postech.techchallenge.order_api.dto.addon.CreateAddonDto;
 import br.com.postech.techchallenge.order_api.dto.addon.UpdateAddonDto;
 import br.com.postech.techchallenge.order_api.enums.ProductCategory;
-import br.com.postech.techchallenge.order_api.infrastructure.entities.AddonEntity;
 import br.com.postech.techchallenge.order_api.infrastructure.repositories.IAddonJpaRepository;
 import br.com.postech.techchallenge.order_api.mapper.IAddonMapper;
 import br.com.postech.techchallenge.order_api.models.Addon;
-import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import br.com.postech.techchallenge.order_api.exception.EntityNotFoundException;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class AddonService {
 
-    @Autowired
-    private IAddonJpaRepository addonRepository;
-    @Autowired
-    private IAddonMapper mapper;
+    private final IAddonJpaRepository addonRepository;
+    private final IAddonMapper mapper;
 
-    public void Create(CreateAddonDto createAddon) {
+    public void create(CreateAddonDto createAddon) {
 
-        Addon addonResponse = mapper.toAddon(createAddon);
+        Addon addon = mapper.toAddon(createAddon);
 
-        AddonEntity entity = mapper.toEntity(addonResponse);
-
-        addonRepository.save(entity);
+        addonRepository.save(addon);
     }
 
-    public List<AddonDto> FindAllByProductCategory(String productCategoryName) {
+    public List<AddonDto> findAllByProductCategory(String productCategoryName) {
 
-        var addonList = addonRepository.findAllByIsActiveTrueAndProductCategory(ProductCategory.fromDisplayName(productCategoryName));
-
-        var addonsList = mapper.toDomains(addonList);
+        var addonsList = addonRepository.findAllByIsActiveTrueAndProductCategory(ProductCategory.fromDisplayName(productCategoryName));
 
         return mapper.toAddonListDto(addonsList);
     }
 
-    public Addon FindById(Long id) {
+    public Addon findById(Long id) throws EntityNotFoundException {
 
-        AddonEntity addonEntity = addonRepository.findById(id).get();
-
-        return mapper.toDomain(addonEntity);
+        return addonRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("The addon was not found."));
     }
 
-    public void Update(Long id, UpdateAddonDto dto) {
+    public void update(Long id, UpdateAddonDto dto) throws EntityNotFoundException {
 
-        AddonEntity addonEntity = addonRepository.findById(id).get();
+        Addon addon = addonRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("The addon was not found."));
 
-        Addon addon = mapper.toDomain(addonEntity);
         addon.update(dto.getName(), dto.getPrice(), dto.getDiscountPercent());
 
-        addonEntity = mapper.toEntity(addon);
-
-        addonRepository.save(addonEntity);
+        addonRepository.save(addon);
     }
 
-    public void Delete(Long id) throws EntityNotFoundException {
+    public void delete(Long id) throws EntityNotFoundException {
 
         if (!addonRepository.existsById(id))
             throw new EntityNotFoundException("The addon was not found.");

@@ -4,10 +4,10 @@ import br.com.postech.techchallenge.order_api.dto.combo.CreateComboDto;
 import br.com.postech.techchallenge.order_api.dto.order.CreateOrderDto;
 import br.com.postech.techchallenge.order_api.enums.OrderStatus;
 import br.com.postech.techchallenge.order_api.enums.ProductCategory;
-import br.com.postech.techchallenge.order_api.infrastructure.entities.*;
 import br.com.postech.techchallenge.order_api.infrastructure.repositories.IAddonJpaRepository;
 import br.com.postech.techchallenge.order_api.infrastructure.repositories.IOrderJpaRepository;
 import br.com.postech.techchallenge.order_api.infrastructure.repositories.IProductJpaRepository;
+import br.com.postech.techchallenge.order_api.models.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
@@ -34,7 +35,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureJsonTesters
-public class OrderControllerTest {
+@ActiveProfiles("test")
+class OrderControllerTest {
     @Autowired
     private MockMvc mvc;
     @Autowired
@@ -64,19 +66,19 @@ public class OrderControllerTest {
 
         //Arrange
         CreateOrderDto createOrderDto = CreateOrderDto();
-        ProductEntity productEntity = CreateProductEntity();
-        CustomerEntity customerEntity = new CustomerEntity();
+        Product productEntity = CreateProduct();
+        Customer customerEntity = new Customer();
 
-        List<AddonEntity> addonEntityList = new ArrayList<>();
-        AddonEntity addonEntity = CreateAddonEntity();
+        List<Addon> addonEntityList = new ArrayList<>();
+        Addon addonEntity = CreateAddon();
         addonEntityList.add(addonEntity);
 
-        List<ComboEntity> comboEntityList = new ArrayList<>();
+        List<Combo> comboEntityList = new ArrayList<>();
 
-        ComboEntity comboEntity = CreateComboEntity(productEntity, addonEntityList);
+        Combo comboEntity = CreateCombo(productEntity, addonEntityList);
         comboEntityList.add(comboEntity);
 
-        OrderEntity orderEntity = CreateOrderEntity(comboEntityList, customerEntity);
+        Order orderEntity = CreateOrder(comboEntityList, customerEntity);
 
         when(addonRepository.findById(1L)).thenReturn(Optional.of(addonEntity));
 
@@ -93,8 +95,8 @@ public class OrderControllerTest {
         assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
     }
 
-    private OrderEntity CreateOrderEntity(List<ComboEntity> comboEntityList, CustomerEntity customerEntity) {
-        OrderEntity orderEntity = new OrderEntity();
+    private Order CreateOrder(List<Combo> comboEntityList, Customer customerEntity) {
+        Order orderEntity = new Order();
         orderEntity.setCombos(comboEntityList);
         orderEntity.setOrderStatus(OrderStatus.CREATED);
         orderEntity.setCustomer(customerEntity);
@@ -102,26 +104,26 @@ public class OrderControllerTest {
         return orderEntity;
     }
 
-    private ComboEntity CreateComboEntity(ProductEntity productEntity, List<AddonEntity> addonEntityList) {
-        ComboEntity comboEntity = new ComboEntity();
+    private Combo CreateCombo(Product productEntity, List<Addon> addonEntityList) {
+        Combo comboEntity = new Combo();
         comboEntity.setProduct(productEntity);
         comboEntity.setAddons(addonEntityList);
 
         return comboEntity;
     }
 
-    private AddonEntity CreateAddonEntity() {
-        AddonEntity addonEntity = new AddonEntity();
+    private Addon CreateAddon() {
+        Addon addonEntity = new Addon();
         addonEntity.setProductCategory(ProductCategory.LANCHE);
         addonEntity.setPrice(BigDecimal.valueOf(0L));
-        addonEntity.setDiscountPercent(BigDecimal.valueOf(0L));
+        addonEntity.setDiscountPercent(0.0);
 
         return addonEntity;
     }
 
-    private ProductEntity CreateProductEntity() {
+    private Product CreateProduct() {
 
-        ProductEntity productEntity = new ProductEntity();
+        Product productEntity = new Product();
         productEntity.setDiscountPercent(0.0);
         productEntity.setPrice(BigDecimal.valueOf(0L));
         productEntity.setProductCategory(ProductCategory.LANCHE);

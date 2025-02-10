@@ -2,7 +2,7 @@ package br.com.postech.techchallenge.order_api.infrastructure.repositories.repos
 
 import br.com.postech.techchallenge.order_api.enums.OrderStatus;
 import br.com.postech.techchallenge.order_api.enums.ProductCategory;
-import br.com.postech.techchallenge.order_api.infrastructure.entities.*;
+import br.com.postech.techchallenge.order_api.models.*;
 
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -12,11 +12,11 @@ import java.util.List;
 
 public class OrderRepositoryMock {
 
-    public static OrderEntity CreateOrderMock(List<ComboEntity> combos,
-                                              OrderStatus orderStatus,
-                                              CustomerEntity customer)
+    public static Order CreateOrderMock(List<Combo> combos,
+                                        OrderStatus orderStatus,
+                                        Customer customer)
     {
-        OrderEntity entity = new OrderEntity();
+        Order entity = new Order();
         entity.setCombos(combos);
         entity.setTotalPrice(BigDecimal.TEN);
         entity.setOrderStatus(orderStatus);
@@ -26,11 +26,11 @@ public class OrderRepositoryMock {
         return entity;
     }
 
-    public static List<ComboEntity> CreateCombo1(ProductEntity product, List<AddonEntity> addonList)
+    public static List<Combo> CreateCombo1(Product product, List<Addon> addonList)
     {
-        List<ComboEntity> entityList = new ArrayList<ComboEntity>();
+        List<Combo> entityList = new ArrayList<Combo>();
 
-        ComboEntity combo1 = new ComboEntity();
+        Combo combo1 = new Combo();
         combo1.setProduct(product);
         combo1.setAddons(addonList);
 
@@ -38,17 +38,17 @@ public class OrderRepositoryMock {
 
         return entityList;
     }
-    public static CustomerEntity CreateCustomer(String name, String cpf) {
-        CustomerEntity customer = new CustomerEntity();
+    public static Customer CreateCustomer(String name, String cpf) {
+        Customer customer = new Customer();
         customer.setName(name);
         customer.setCpf(cpf);
         customer.setEmail("Customer1@");
 
         return customer;
     }
-    public static ProductEntity CreateProduct1(String name, ProductCategory category)
+    public static Product CreateProduct1(String name, ProductCategory category)
     {
-        ProductEntity product = new ProductEntity();
+        Product product = new Product();
 
         product.setName(name);
         product.setDescription(" ");
@@ -60,14 +60,14 @@ public class OrderRepositoryMock {
         return product;
     }
 
-    public static List<AddonEntity> CreateAddonList() {
+    public static List<Addon> CreateAddonList() {
 
-        List<AddonEntity> entityList = new ArrayList<AddonEntity>();
+        List<Addon> entityList = new ArrayList<Addon>();
 
-        AddonEntity addon1 = new AddonEntity();
+        Addon addon1 = new Addon();
         addon1.setName("Batata");
         addon1.setPrice(BigDecimal.ONE);
-        addon1.setDiscountPercent(BigDecimal.ZERO);
+        addon1.setDiscountPercent(0.0);
         addon1.setProductCategory(ProductCategory.ACOMPANHAMENTO);
 
         entityList.add(addon1);

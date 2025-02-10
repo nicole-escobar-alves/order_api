@@ -5,99 +5,94 @@ import br.com.postech.techchallenge.order_api.dto.order.CreateOrderDto;
 import br.com.postech.techchallenge.order_api.dto.order.DetailsOrderDto;
 import br.com.postech.techchallenge.order_api.dto.order.OrderDto;
 import br.com.postech.techchallenge.order_api.enums.OrderStatus;
-import br.com.postech.techchallenge.order_api.infrastructure.entities.CustomerEntity;
-import br.com.postech.techchallenge.order_api.infrastructure.entities.OrderEntity;
+import br.com.postech.techchallenge.order_api.exception.EntityNotFoundException;
+import br.com.postech.techchallenge.order_api.infrastructure.repositories.ICustomerJpaRepository;
 import br.com.postech.techchallenge.order_api.infrastructure.repositories.IOrderJpaRepository;
 import br.com.postech.techchallenge.order_api.mapper.IOrderMapper;
 import br.com.postech.techchallenge.order_api.models.Combo;
+import br.com.postech.techchallenge.order_api.models.Customer;
 import br.com.postech.techchallenge.order_api.models.Order;
-import br.com.postech.techchallenge.order_api.service.externalApiService.IPaymentApiService;
-import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class OrderService {
 
-    @Autowired
-    IOrderJpaRepository orderRepository;
+    private final IOrderJpaRepository orderRepository;
+    private final IOrderMapper orderMapper;
+    private final ComboService comboService;
+    private final ICustomerJpaRepository customerRepository;
 
-    @Autowired
-    IOrderMapper orderMapper;
-
-    @Autowired
-    ComboService comboService;
-    @Autowired
-    CustomerService customerService;
-    @Autowired
-    IPaymentApiService paymentService;
-
-    public void Create(CreateOrderDto createOrderDto) throws EntityNotFoundException {
+    public void create(CreateOrderDto createOrderDto) throws EntityNotFoundException {
 
         Order order = new Order();
 
         for (CreateComboDto comboDto : createOrderDto.getCombos()) {
 
-            Combo combo = comboService.Create(comboDto);
+            Combo combo = comboService.create(comboDto);
 
-            order.AddCombo(combo);
+            order.addCombo(combo);
         }
 
-        AddCustomerInOrder(order, createOrderDto);
+        addCustomerInOrder(order, createOrderDto);
 
-        OrderEntity orderSaved = orderRepository.save(orderMapper.toEntity(order));
+        Order orderSaved = orderRepository.save(order);
 
         //paymentService.Create(orderMapper.toDomain(orderSaved));
     }
 
-    private void AddCustomerInOrder(Order order, CreateOrderDto createOrderDto) throws EntityNotFoundException {
+    public List<OrderDto> findAllByCPF(String cpf) {
 
-        CustomerEntity customer;
-        try {
-            customer = customerService.customerRepository.findById(createOrderDto.getCustomerId()).get();
-        } catch (EntityNotFoundException e) {
-            customer = customerService.customerRepository.save(new CustomerEntity());
-        }
+        List<Order> orders = orderRepository.findAllByCustomerCpf(cpf);
 
-        order.setCustomer(customerService.customerMapper.toDomain(customer));
+        return orderMapper.toOrdersDto(orders);
     }
 
-    public List<OrderDto> FindByCPF(String cpf) {
+    public DetailsOrderDto findById(Long id) throws EntityNotFoundException {
 
-        List<OrderEntity> ordersListEntity = orderRepository.findAllByCustomerCpf(cpf);
+        Order order = orderRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("The order was not found."));
 
-        return orderMapper.toOrdersDto(orderMapper.toDomains(ordersListEntity));
+        return orderMapper.toDetailsOrderDto(order);
     }
 
-    public DetailsOrderDto FindById(Long id) {
+    public List<DetailsOrderDto> findByOrderStatus(OrderStatus orderStatus) {
 
-        OrderEntity ordersEntity = orderRepository.findById(id).get();
+        List<Order> orders = orderRepository.findAllByOrderStatus(orderStatus);
 
-        return orderMapper.toDetailsOrderDto(orderMapper.toDomain(ordersEntity));
+        return orderMapper.toDetailsOrdersDto(orders);
     }
 
-    public List<DetailsOrderDto> FindByOrderStatus(OrderStatus orderStatus) throws EntityNotFoundException {
-
-        List<OrderEntity> OrderListEntity = orderRepository.findAllByOrderStatus(orderStatus);
-
-        return orderMapper.toDetailsOrdersDto(orderMapper.toDomains(OrderListEntity));
-    }
-
-    public List<DetailsOrderDto> FindAll() throws EntityNotFoundException {
+    public List<DetailsOrderDto> findAll() {
 
         var response = orderRepository.findAll();
 
-        return orderMapper.toDetailsOrdersDto(orderMapper.toDomains(response));
+        return orderMapper.toDetailsOrdersDto(response);
     }
 
-    public void Update(Long id, OrderStatus orderStatus) throws EntityNotFoundException {
+    public void updateStatus(Long id, OrderStatus orderStatus) throws EntityNotFoundException {
 
-        OrderEntity orderEntity = orderRepository.findById(id).get();
+        Order order = orderRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("The order was not found."));
 
-        orderMapper.toDomain(orderEntity).UpdateOrderStatus(orderStatus);
+        order.updateOrderStatus(orderStatus);
 
-        orderRepository.save(orderEntity);
+        orderRepository.save(order);
     }
+
+
+    private void addCustomerInOrder(Order order, CreateOrderDto createOrderDto) throws EntityNotFoundException {
+
+        Customer customer;
+        try {
+            customer = customerRepository.findById(createOrderDto.getCustomerId())
+                    .orElseThrow(()-> new EntityNotFoundException("The customer was not found."));
+        } catch (EntityNotFoundException e) {
+            customer = customerRepository.save(new Customer());
+        }
+
+        order.setCustomer(customer);
+    }
+
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface IPaymentApiService {
 
     @PostMapping()
-    void Create(@RequestBody() Order order);
+    void create(@RequestBody() Order order);
 
 }
 
