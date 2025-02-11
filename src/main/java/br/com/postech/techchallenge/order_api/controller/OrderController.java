@@ -23,8 +23,8 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<OrderDto> create(@RequestBody @Valid CreateOrderDto orderDto) throws EntityNotFoundException {
-        orderService.create(orderDto);
-        return ResponseEntity.status(HttpStatus.CREATED.value()).build();
+        var order = orderService.create(orderDto);
+        return new ResponseEntity<>(order, HttpStatus.CREATED);
 
     }
 

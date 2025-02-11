@@ -21,9 +21,9 @@ public class AddonController {
     private final AddonService addonService;
 
     @PostMapping
-    public ResponseEntity<String> create(@RequestBody @Valid CreateAddonDto dto) {
+    public ResponseEntity<Void> create(@RequestBody @Valid CreateAddonDto dto) {
         addonService.create(dto);
-        return ResponseEntity.status(HttpStatus.CREATED.value()).build();
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping

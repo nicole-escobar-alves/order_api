@@ -23,7 +23,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerDto> create(@RequestBody CreateCustomerDto dto) throws EntityNotFoundException {
+    public ResponseEntity<CustomerDto> create(@RequestBody CreateCustomerDto dto) {
         customerService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED.value()).build();
     }

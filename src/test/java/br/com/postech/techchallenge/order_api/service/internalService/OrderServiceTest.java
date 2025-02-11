@@ -1,6 +1,5 @@
 package br.com.postech.techchallenge.order_api.service.internalService;
 
-import br.com.postech.techchallenge.order_api.dto.combo.ComboDto;
 import br.com.postech.techchallenge.order_api.dto.combo.CreateComboDto;
 import br.com.postech.techchallenge.order_api.dto.order.CreateOrderDto;
 import br.com.postech.techchallenge.order_api.enums.OrderStatus;
@@ -9,7 +8,6 @@ import br.com.postech.techchallenge.order_api.exception.EntityNotFoundException;
 import br.com.postech.techchallenge.order_api.infrastructure.repositories.ICustomerJpaRepository;
 import br.com.postech.techchallenge.order_api.infrastructure.repositories.IOrderJpaRepository;
 import br.com.postech.techchallenge.order_api.mapper.IOrderMapper;
-import br.com.postech.techchallenge.order_api.mapper.IOrderMapperImpl;
 import br.com.postech.techchallenge.order_api.mapper.IOrderStatusMapper;
 import br.com.postech.techchallenge.order_api.models.Addon;
 import br.com.postech.techchallenge.order_api.models.Combo;
@@ -23,10 +21,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,14 +55,16 @@ class OrderServiceTest {
     void create() throws EntityNotFoundException {
         CreateComboDto comboDto = new CreateComboDto(1L, List.of(1L));
         Combo combo = createCombo();
-
+        Order order = new Order(List.of(combo), BigDecimal.TEN, OrderStatus.CREATED, null, null );
         CreateOrderDto orderDto = new CreateOrderDto( List.of(comboDto), 1L);
         when(comboService.create(any(CreateComboDto.class))).thenReturn(combo);
         when(customerRepository.findById(1L)).thenReturn(Optional.empty());
+        when(orderRepository.save(any(Order.class))).thenReturn(order);
 
-        orderService.create(orderDto);
+        var dto = orderService.create(orderDto);
 
         verify(orderRepository, times(1)).save(any(Order.class));
+        assertEquals(OrderStatus.CREATED.toString(), dto.getOrderStatus());
     }
 
     @Test
@@ -93,7 +92,7 @@ class OrderServiceTest {
     }
 
     @Test
-    void findByIdWhenIdNotExists() throws EntityNotFoundException {
+    void findByIdWhenIdNotExists() {
         when(orderRepository.findById(1L)).thenReturn(Optional.empty());
         assertThrows(EntityNotFoundException.class, ()-> orderService.findById(1L));
     }

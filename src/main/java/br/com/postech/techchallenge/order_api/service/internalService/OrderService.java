@@ -26,7 +26,7 @@ public class OrderService {
     private final ComboService comboService;
     private final ICustomerJpaRepository customerRepository;
 
-    public void create(CreateOrderDto createOrderDto) throws EntityNotFoundException {
+    public OrderDto create(CreateOrderDto createOrderDto) throws EntityNotFoundException {
 
         Order order = new Order();
 
@@ -41,7 +41,9 @@ public class OrderService {
 
         Order orderSaved = orderRepository.save(order);
 
-        //paymentService.Create(orderMapper.toDomain(orderSaved));
+        //paymentService.Create(orderSaved);
+
+        return orderMapper.toOrderDto(orderSaved);
     }
 
     public List<OrderDto> findAllByCPF(String cpf) {
@@ -80,7 +82,6 @@ public class OrderService {
 
         orderRepository.save(order);
     }
-
 
     private void addCustomerInOrder(Order order, CreateOrderDto createOrderDto) throws EntityNotFoundException {
 

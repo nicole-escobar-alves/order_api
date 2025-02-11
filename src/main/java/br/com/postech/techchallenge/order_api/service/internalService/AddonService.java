@@ -41,7 +41,7 @@ public class AddonService {
 
     public void update(Long id, UpdateAddonDto dto) throws EntityNotFoundException {
 
-        Addon addon = addonRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("The addon was not found."));
+        Addon addon = findById(id);
 
         addon.update(dto.getName(), dto.getPrice(), dto.getDiscountPercent());
 
