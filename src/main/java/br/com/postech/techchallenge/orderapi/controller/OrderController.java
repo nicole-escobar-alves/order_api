@@ -51,6 +51,12 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.OK.value()).build();
     }
 
+    @PutMapping("/makePayment/{id}")
+    public ResponseEntity<OrderDto> makePayment(@PathVariable("id") Long id) throws EntityNotFoundException {
+        orderService.makePayment(id);
+        return ResponseEntity.status(HttpStatus.OK.value()).build();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<DetailsOrderDto> getOrderById(@PathVariable Long id) throws EntityNotFoundException {
         return ResponseEntity.ok(orderService.findById(id));

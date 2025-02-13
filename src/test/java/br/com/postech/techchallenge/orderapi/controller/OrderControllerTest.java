@@ -71,7 +71,7 @@ class OrderControllerTest {
     }
 
     @Test
-    void getAllOrders() throws EntityNotFoundException {
+    void getAllOrders(){
         DetailsOrderDto detailsOrderDto = new DetailsOrderDto();
         List<DetailsOrderDto> dtos = List.of(detailsOrderDto);
         when(orderService.findAll()).thenReturn(dtos);
@@ -91,6 +91,13 @@ class OrderControllerTest {
         assertAll(
                 ()-> assertEquals(HttpStatus.OK, result.getStatusCode())
         );
+    }
+
+    @Test
+    void makePayment() throws EntityNotFoundException {
+        var result = orderController.makePayment(1L);
+
+        assertEquals(HttpStatus.OK, result.getStatusCode());
     }
 
     @Test

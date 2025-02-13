@@ -2,6 +2,7 @@ package br.com.postech.techchallenge.orderapi.service.internal;
 
 import br.com.postech.techchallenge.orderapi.dto.combo.CreateComboDto;
 import br.com.postech.techchallenge.orderapi.dto.order.CreateOrderDto;
+import br.com.postech.techchallenge.orderapi.dto.order.DetailsOrderDto;
 import br.com.postech.techchallenge.orderapi.enums.OrderStatus;
 import br.com.postech.techchallenge.orderapi.enums.ProductCategory;
 import br.com.postech.techchallenge.orderapi.exception.EntityNotFoundException;
@@ -13,6 +14,8 @@ import br.com.postech.techchallenge.orderapi.models.Addon;
 import br.com.postech.techchallenge.orderapi.models.Combo;
 import br.com.postech.techchallenge.orderapi.models.Order;
 import br.com.postech.techchallenge.orderapi.models.Product;
+import br.com.postech.techchallenge.orderapi.service.external.IPaymentApiService;
+import br.com.postech.techchallenge.orderapi.service.external.IProductionApiService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,6 +44,10 @@ class OrderServiceTest {
     private ComboService comboService;
     @Mock
     private ICustomerJpaRepository customerRepository;
+    @Mock
+    private IPaymentApiService paymentApiService;
+    @Mock
+    private IProductionApiService productionApiService;
     @Spy
     private IOrderMapper orderMapper = Mappers.getMapper(IOrderMapper.class);
     @Spy
@@ -134,6 +141,19 @@ class OrderServiceTest {
         orderService.updateStatus(1L, OrderStatus.RECEIVED);
 
         verify(orderRepository, times(1)).save(any(Order.class));
+    }
+
+    @Test
+    void makePayment() throws EntityNotFoundException {
+        Order order = new Order();
+        order.setId(1L);
+        when(orderRepository.findById(1L)).thenReturn(Optional.of(order));
+        when(orderRepository.save(order)).thenReturn(order);
+
+        orderService.makePayment(1L);
+
+        verify(orderRepository, times(1)).save(any(Order.class));
+        verify(productionApiService, times(1)).create(any(DetailsOrderDto.class));
     }
 
 

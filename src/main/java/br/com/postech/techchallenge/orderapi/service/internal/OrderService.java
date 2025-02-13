@@ -12,6 +12,8 @@ import br.com.postech.techchallenge.orderapi.mapper.IOrderMapper;
 import br.com.postech.techchallenge.orderapi.models.Combo;
 import br.com.postech.techchallenge.orderapi.models.Customer;
 import br.com.postech.techchallenge.orderapi.models.Order;
+import br.com.postech.techchallenge.orderapi.service.external.IProductionApiService;
+import br.com.postech.techchallenge.orderapi.service.external.IPaymentApiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,8 @@ public class OrderService {
     private final IOrderMapper orderMapper;
     private final ComboService comboService;
     private final ICustomerJpaRepository customerRepository;
+    private final IPaymentApiService paymentApiService;
+    private final IProductionApiService productionApiService;
 
     public OrderDto create(CreateOrderDto createOrderDto) throws EntityNotFoundException {
 
@@ -41,7 +45,7 @@ public class OrderService {
 
         Order orderSaved = orderRepository.save(order);
 
-        //paymentService.Create(orderSaved);
+        //paymentService.create(orderSaved);
 
         return orderMapper.toOrderDto(orderSaved);
     }
@@ -81,6 +85,14 @@ public class OrderService {
         order.updateOrderStatus(orderStatus);
 
         orderRepository.save(order);
+    }
+
+    public void makePayment(Long id) throws EntityNotFoundException {
+        Order order = orderRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("The order was not found."));
+        order.updateOrderStatus(OrderStatus.RECEIVED);
+        var orderSaved = orderRepository.save(order);
+
+        productionApiService.create(orderMapper.toDetailsOrderDto(orderSaved));
     }
 
     private void addCustomerInOrder(Order order, CreateOrderDto createOrderDto) throws EntityNotFoundException {
