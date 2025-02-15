@@ -1,5 +1,6 @@
-package br.com.postech.techchallenge.order_api.controller;
+package br.com.postech.techchallenge.order_api.unitTests.controller;
 
+import br.com.postech.techchallenge.order_api.controller.OrderController;
 import br.com.postech.techchallenge.order_api.dto.order.CreateOrderDto;
 import br.com.postech.techchallenge.order_api.dto.order.DetailsOrderDto;
 import br.com.postech.techchallenge.order_api.dto.order.OrderDto;

@@ -1,4 +1,4 @@
-package br.com.postech.techchallenge.order_api.service.internalService;
+package br.com.postech.techchallenge.order_api.unitTests.internalService;
 
 import br.com.postech.techchallenge.order_api.dto.combo.CreateComboDto;
 import br.com.postech.techchallenge.order_api.dto.order.CreateOrderDto;
@@ -13,6 +13,8 @@ import br.com.postech.techchallenge.order_api.models.Addon;
 import br.com.postech.techchallenge.order_api.models.Combo;
 import br.com.postech.techchallenge.order_api.models.Order;
 import br.com.postech.techchallenge.order_api.models.Product;
+import br.com.postech.techchallenge.order_api.service.internalService.ComboService;
+import br.com.postech.techchallenge.order_api.service.internalService.OrderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

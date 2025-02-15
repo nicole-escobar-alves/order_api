@@ -1,10 +1,13 @@
-package br.com.postech.techchallenge.order_api.service.internalService;
+package br.com.postech.techchallenge.order_api.unitTests.internalService;
 
 import br.com.postech.techchallenge.order_api.dto.combo.CreateComboDto;
 import br.com.postech.techchallenge.order_api.enums.ProductCategory;
 import br.com.postech.techchallenge.order_api.exception.EntityNotFoundException;
 import br.com.postech.techchallenge.order_api.models.Addon;
 import br.com.postech.techchallenge.order_api.models.Product;
+import br.com.postech.techchallenge.order_api.service.internalService.AddonService;
+import br.com.postech.techchallenge.order_api.service.internalService.ComboService;
+import br.com.postech.techchallenge.order_api.service.internalService.ProductService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

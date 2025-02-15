@@ -1,6 +1,7 @@
-package br.com.postech.techchallenge.order_api.mapper;
+package br.com.postech.techchallenge.order_api.unitTests.mapper;
 
 import br.com.postech.techchallenge.order_api.enums.OrderStatus;
+import br.com.postech.techchallenge.order_api.mapper.IOrderStatusMapper;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 

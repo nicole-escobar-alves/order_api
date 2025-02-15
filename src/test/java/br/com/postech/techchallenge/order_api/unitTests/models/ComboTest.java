@@ -1,6 +1,9 @@
-package br.com.postech.techchallenge.order_api.models;
+package br.com.postech.techchallenge.order_api.unitTests.models;
 
 import br.com.postech.techchallenge.order_api.enums.ProductCategory;
+import br.com.postech.techchallenge.order_api.models.Addon;
+import br.com.postech.techchallenge.order_api.models.Combo;
+import br.com.postech.techchallenge.order_api.models.Product;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;

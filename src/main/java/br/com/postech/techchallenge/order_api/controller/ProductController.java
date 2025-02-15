@@ -1,5 +1,6 @@
 package br.com.postech.techchallenge.order_api.controller;
 
+import br.com.postech.techchallenge.order_api.dto.addon.UpdateAddonDto;
 import br.com.postech.techchallenge.order_api.dto.product.CreateProductDto;
 import br.com.postech.techchallenge.order_api.dto.product.ProductDto;
 import br.com.postech.techchallenge.order_api.dto.product.UpdateProductDto;

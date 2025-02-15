@@ -1,4 +1,4 @@
-package br.com.postech.techchallenge.order_api.service.internalService;
+package br.com.postech.techchallenge.order_api.unitTests.internalService;
 
 import br.com.postech.techchallenge.order_api.dto.addon.CreateAddonDto;
 import br.com.postech.techchallenge.order_api.dto.addon.UpdateAddonDto;
@@ -7,6 +7,7 @@ import br.com.postech.techchallenge.order_api.exception.EntityNotFoundException;
 import br.com.postech.techchallenge.order_api.infrastructure.repositories.IAddonJpaRepository;
 import br.com.postech.techchallenge.order_api.mapper.IAddonMapper;
 import br.com.postech.techchallenge.order_api.models.Addon;
+import br.com.postech.techchallenge.order_api.service.internalService.AddonService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;

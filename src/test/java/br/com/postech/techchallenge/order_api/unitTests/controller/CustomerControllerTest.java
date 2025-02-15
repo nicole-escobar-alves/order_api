@@ -1,5 +1,6 @@
-package br.com.postech.techchallenge.order_api.controller;
+package br.com.postech.techchallenge.order_api.unitTests.controller;
 
+import br.com.postech.techchallenge.order_api.controller.CustomerController;
 import br.com.postech.techchallenge.order_api.dto.customer.CreateCustomerDto;
 import br.com.postech.techchallenge.order_api.dto.customer.CustomerDto;
 import br.com.postech.techchallenge.order_api.exception.EntityNotFoundException;

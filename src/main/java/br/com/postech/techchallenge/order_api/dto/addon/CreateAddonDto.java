@@ -1,7 +1,6 @@
 package br.com.postech.techchallenge.order_api.dto.addon;
 
 import br.com.postech.techchallenge.order_api.enums.ProductCategory;
-import io.cucumber.java.eo.Se;
 import lombok.*;
 
 import java.math.BigDecimal;
