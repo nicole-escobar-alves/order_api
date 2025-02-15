@@ -1,19 +1,10 @@
-<<<<<<<< HEAD:src/test/java/br/com/postech/techchallenge/order_api/unitTests/controller/CustomerControllerTest.java
-package br.com.postech.techchallenge.order_api.unitTests.controller;
 
-import br.com.postech.techchallenge.order_api.controller.CustomerController;
-import br.com.postech.techchallenge.order_api.dto.customer.CreateCustomerDto;
-import br.com.postech.techchallenge.order_api.dto.customer.CustomerDto;
-import br.com.postech.techchallenge.order_api.exception.EntityNotFoundException;
-import br.com.postech.techchallenge.order_api.service.internalService.CustomerService;
-========
 package br.com.postech.techchallenge.orderapi.controller;
 
 import br.com.postech.techchallenge.orderapi.dto.customer.CreateCustomerDto;
 import br.com.postech.techchallenge.orderapi.dto.customer.CustomerDto;
 import br.com.postech.techchallenge.orderapi.exception.EntityNotFoundException;
 import br.com.postech.techchallenge.orderapi.service.internal.CustomerService;
->>>>>>>> 2b22bf7f4b2f320fe86d03630d6207be83bfa663:src/test/java/br/com/postech/techchallenge/orderapi/controller/CustomerControllerTest.java
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

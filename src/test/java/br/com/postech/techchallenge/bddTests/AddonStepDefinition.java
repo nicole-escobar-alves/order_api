@@ -1,4 +1,4 @@
-package br.com.postech.techchallenge.order_api.bddTests;
+package br.com.postech.techchallenge.bddTests;
 
 import br.com.postech.techchallenge.orderapi.dto.addon.AddonDto;
 import br.com.postech.techchallenge.orderapi.dto.addon.CreateAddonDto;

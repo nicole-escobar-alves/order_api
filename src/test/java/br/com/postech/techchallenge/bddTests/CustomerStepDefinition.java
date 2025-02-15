@@ -1,4 +1,4 @@
-package br.com.postech.techchallenge.order_api.bddTests;
+package br.com.postech.techchallenge.bddTests;
 
 import br.com.postech.techchallenge.order_api.dto.customer.CreateCustomerDto;
 import io.cucumber.java.en.Given;

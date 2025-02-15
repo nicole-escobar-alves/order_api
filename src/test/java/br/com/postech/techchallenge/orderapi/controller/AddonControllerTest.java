@@ -1,14 +1,4 @@
-<<<<<<<< HEAD:src/test/java/br/com/postech/techchallenge/order_api/unitTests/controller/AddonControllerTest.java
-package br.com.postech.techchallenge.order_api.unitTests.controller;
 
-import br.com.postech.techchallenge.order_api.controller.AddonController;
-import br.com.postech.techchallenge.order_api.dto.addon.AddonDto;
-import br.com.postech.techchallenge.order_api.dto.addon.CreateAddonDto;
-import br.com.postech.techchallenge.order_api.dto.addon.UpdateAddonDto;
-import br.com.postech.techchallenge.order_api.enums.ProductCategory;
-import br.com.postech.techchallenge.order_api.exception.EntityNotFoundException;
-import br.com.postech.techchallenge.order_api.service.internalService.AddonService;
-========
 package br.com.postech.techchallenge.orderapi.controller;
 
 import br.com.postech.techchallenge.orderapi.dto.addon.AddonDto;
@@ -17,7 +7,6 @@ import br.com.postech.techchallenge.orderapi.dto.addon.UpdateAddonDto;
 import br.com.postech.techchallenge.orderapi.enums.ProductCategory;
 import br.com.postech.techchallenge.orderapi.exception.EntityNotFoundException;
 import br.com.postech.techchallenge.orderapi.service.internal.AddonService;
->>>>>>>> 2b22bf7f4b2f320fe86d03630d6207be83bfa663:src/test/java/br/com/postech/techchallenge/orderapi/controller/AddonControllerTest.java
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

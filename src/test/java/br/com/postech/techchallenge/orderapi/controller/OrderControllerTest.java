@@ -1,14 +1,4 @@
-<<<<<<<< HEAD:src/test/java/br/com/postech/techchallenge/order_api/unitTests/controller/OrderControllerTest.java
-package br.com.postech.techchallenge.order_api.unitTests.controller;
 
-import br.com.postech.techchallenge.order_api.controller.OrderController;
-import br.com.postech.techchallenge.order_api.dto.order.CreateOrderDto;
-import br.com.postech.techchallenge.order_api.dto.order.DetailsOrderDto;
-import br.com.postech.techchallenge.order_api.dto.order.OrderDto;
-import br.com.postech.techchallenge.order_api.enums.OrderStatus;
-import br.com.postech.techchallenge.order_api.exception.EntityNotFoundException;
-import br.com.postech.techchallenge.order_api.service.internalService.OrderService;
-========
 package br.com.postech.techchallenge.orderapi.controller;
 
 import br.com.postech.techchallenge.orderapi.dto.order.CreateOrderDto;
@@ -17,7 +7,6 @@ import br.com.postech.techchallenge.orderapi.dto.order.OrderDto;
 import br.com.postech.techchallenge.orderapi.enums.OrderStatus;
 import br.com.postech.techchallenge.orderapi.exception.EntityNotFoundException;
 import br.com.postech.techchallenge.orderapi.service.internal.OrderService;
->>>>>>>> 2b22bf7f4b2f320fe86d03630d6207be83bfa663:src/test/java/br/com/postech/techchallenge/orderapi/controller/OrderControllerTest.java
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

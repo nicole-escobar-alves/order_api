@@ -1,4 +1,4 @@
-package br.com.postech.techchallenge.order_api.bddTests;
+package br.com.postech.techchallenge.bddTests;
 
 import org.junit.platform.suite.api.IncludeEngines;
 import org.junit.platform.suite.api.SelectClasspathResource;
