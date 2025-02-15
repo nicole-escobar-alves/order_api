@@ -17,10 +17,8 @@ ENV DB_PORT =""
 ENV DB_NAME =""
 ENV DB_USER =""
 ENV DB_PASSWORD =""
-ENV ML_ACCESS_TOKEN =""
-ENV ML_USER_ID =""
-ENV ML_EXTERNAL_POS_ID =""
-ENV APP_URL =""
+ENV PAYMENT_NAME =""
+ENV PAYMENT_URL =""
 
 WORKDIR /app
 COPY --from=builder ./app/target/*.jar app.jar
@@ -29,9 +27,7 @@ ENTRYPOINT ["java", "-jar", "/app/app.jar",\
     "--spring.datasource.url=jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}",\
     "--spring.datasource.username=${DB_USER}",\
     "--spring.datasource.password=${DB_PASSWORD}",\
-    "--mercadopago.access_token=${ML_ACCESS_TOKEN}",\
-    "--mercadopago.user_id=${ML_USER_ID}",\
-    "--mercadopago.external_pos_id=${ML_EXTERNAL_POS_ID}",\
-    "--app-url=${APP_URL}"]
+    "--payment-service.name=${PAYMENT_NAME}",\
+    "--payment-service.url=${PAYMENT_URL}"]
 
 EXPOSE 8080

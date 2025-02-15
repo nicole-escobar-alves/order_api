@@ -22,3 +22,10 @@ springdoc:
   version: v1
   show-actuator: false
 
+payment-service:
+  name: Payment-Api
+  url: https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1
+
+production-service:
+    name: Production-Api
+    url: https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1
