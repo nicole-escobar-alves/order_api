@@ -1,15 +1,4 @@
-<<<<<<<< HEAD:src/test/java/br/com/postech/techchallenge/order_api/unitTests/internalService/ComboServiceTest.java
-package br.com.postech.techchallenge.order_api.unitTests.internalService;
 
-import br.com.postech.techchallenge.order_api.dto.combo.CreateComboDto;
-import br.com.postech.techchallenge.order_api.enums.ProductCategory;
-import br.com.postech.techchallenge.order_api.exception.EntityNotFoundException;
-import br.com.postech.techchallenge.order_api.models.Addon;
-import br.com.postech.techchallenge.order_api.models.Product;
-import br.com.postech.techchallenge.order_api.service.internalService.AddonService;
-import br.com.postech.techchallenge.order_api.service.internalService.ComboService;
-import br.com.postech.techchallenge.order_api.service.internalService.ProductService;
-========
 package br.com.postech.techchallenge.orderapi.service.internal;
 
 import br.com.postech.techchallenge.orderapi.dto.combo.CreateComboDto;
@@ -17,7 +6,6 @@ import br.com.postech.techchallenge.orderapi.enums.ProductCategory;
 import br.com.postech.techchallenge.orderapi.exception.EntityNotFoundException;
 import br.com.postech.techchallenge.orderapi.models.Addon;
 import br.com.postech.techchallenge.orderapi.models.Product;
->>>>>>>> 2b22bf7f4b2f320fe86d03630d6207be83bfa663:src/test/java/br/com/postech/techchallenge/orderapi/service/internal/ComboServiceTest.java
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -1,15 +1,7 @@
-<<<<<<<< HEAD:src/test/java/br/com/postech/techchallenge/order_api/unitTests/models/ComboTest.java
-package br.com.postech.techchallenge.order_api.unitTests.models;
 
-import br.com.postech.techchallenge.order_api.enums.ProductCategory;
-import br.com.postech.techchallenge.order_api.models.Addon;
-import br.com.postech.techchallenge.order_api.models.Combo;
-import br.com.postech.techchallenge.order_api.models.Product;
-========
 package br.com.postech.techchallenge.orderapi.models;
 
 import br.com.postech.techchallenge.orderapi.enums.ProductCategory;
->>>>>>>> 2b22bf7f4b2f320fe86d03630d6207be83bfa663:src/test/java/br/com/postech/techchallenge/orderapi/models/ComboTest.java
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
