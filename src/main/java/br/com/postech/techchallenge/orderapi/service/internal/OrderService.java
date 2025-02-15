@@ -45,7 +45,7 @@ public class OrderService {
 
         Order orderSaved = orderRepository.save(order);
 
-        //paymentService.create(orderSaved);
+        paymentApiService.create(orderMapper.toCreateOrderPaymentDto(orderSaved));
 
         return orderMapper.toOrderDto(orderSaved);
     }
