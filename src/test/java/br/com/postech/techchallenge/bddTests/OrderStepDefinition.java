@@ -1,9 +1,9 @@
 package br.com.postech.techchallenge.bddTests;
 
-import br.com.postech.techchallenge.order_api.dto.combo.CreateComboDto;
-import br.com.postech.techchallenge.order_api.dto.order.CreateOrderDto;
-import br.com.postech.techchallenge.order_api.dto.order.DetailsOrderDto;
-import br.com.postech.techchallenge.order_api.enums.OrderStatus;
+import br.com.postech.techchallenge.orderapi.dto.combo.CreateComboDto;
+import br.com.postech.techchallenge.orderapi.dto.order.CreateOrderDto;
+import br.com.postech.techchallenge.orderapi.dto.order.DetailsOrderDto;
+import br.com.postech.techchallenge.orderapi.enums.OrderStatus;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

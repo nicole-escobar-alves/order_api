@@ -1,6 +1,6 @@
 package br.com.postech.techchallenge.bddTests;
 
-import br.com.postech.techchallenge.order_api.dto.customer.CreateCustomerDto;
+import br.com.postech.techchallenge.orderapi.dto.customer.CreateCustomerDto;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
