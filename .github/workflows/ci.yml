@@ -44,3 +44,6 @@ jobs:
           -Dsonar.exclusions=**/*.json,**/*.xml \
           -Dsonar.qualitygate.wait=true \
           -Dactive.profile=test
+
+      - name: BDD test
+        run: mvn test
