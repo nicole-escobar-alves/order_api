@@ -54,6 +54,9 @@ jobs:
           -Dsonar.qualitygate.wait=true \
           -Dactive.profile=test
 
+      - name: Wait for services
+        run: sleep 20
+        
       - name: Set up Docker Compose
         run: |
           docker-compose -f docker-compose.yml up -d
