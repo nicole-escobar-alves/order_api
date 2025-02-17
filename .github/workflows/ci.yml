@@ -27,7 +27,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Start Sprint Boot Api for test BDD
-        run: mvn spring-boot:run -Dspring-boot.run.profiles=test
+        run: mvn spring-boot:run -Dspring-boot.run.profiles=test &
 
       - name: Wait for API to be available
         run: |
