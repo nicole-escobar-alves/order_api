@@ -9,6 +9,14 @@ jobs:
   build:
     name: Build and analyze
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        options: --health-cmd "pg_isready -U postgres" --health-interval 10s --health-timeout 5s --health-retries 3
     steps:
       - uses: actions/checkout@v4
         with:
@@ -43,3 +51,13 @@ jobs:
           -Dsonar.exclusions=**/*.json,**/*.xml \
           -Dsonar.qualitygate.wait=true \
           -Dactive.profile=test
+
+      - name: Start application
+        run: mvn spring-boot:run &
+
+      - name: Wait application already
+        run:
+          sleep 30 
+
+      - name: BDD test
+        run: mvn test
