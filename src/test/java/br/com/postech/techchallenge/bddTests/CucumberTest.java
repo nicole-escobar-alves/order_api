@@ -9,7 +9,4 @@ import org.junit.platform.suite.api.Suite;
 @SelectClasspathResource("features")
 public class CucumberTest {
 
-
-
-
 }
