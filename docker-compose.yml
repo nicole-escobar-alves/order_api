@@ -15,7 +15,7 @@ services:
       DB_USER: postgres
       DB_PASSWORD: postgres
       PAYMENT_NAME: Payment-Api
-      PAYMENT_URL: https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1
+      PAYMENT_URL: http://pagamento:8080/api
     healthcheck:
       test: [ "CMD-SHELL", "sh -c 'pg_isready -U postgres -d gestaopedidos'" ]
       interval: 10s
@@ -32,3 +32,12 @@ services:
     ports:
       - '5433:5432'
 
+#  pagamento:
+#    image: gestaopedidospayment  # Nome da imagem já buildada
+#    container_name: payment-service
+#    ports:
+#      - "8080:8080"
+#      - "8081:8081"
+#    environment:
+#      MongoConnectionString: string-mongo
+#      WebHookUrl: http://gestaopedidos:8080/order/makePayment

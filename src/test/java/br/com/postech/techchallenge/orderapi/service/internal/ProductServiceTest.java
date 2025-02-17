@@ -6,8 +6,10 @@ import br.com.postech.techchallenge.orderapi.dto.product.UpdateProductDto;
 import br.com.postech.techchallenge.orderapi.enums.ProductCategory;
 import br.com.postech.techchallenge.orderapi.exception.EntityNotFoundException;
 import br.com.postech.techchallenge.orderapi.infrastructure.repositories.IProductJpaRepository;
+import br.com.postech.techchallenge.orderapi.mapper.IProductCategoryMapper;
 import br.com.postech.techchallenge.orderapi.mapper.IProductMapper;
 import br.com.postech.techchallenge.orderapi.models.Product;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
@@ -15,6 +17,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -35,6 +38,13 @@ class ProductServiceTest {
 
     @Spy
     private IProductMapper mapper = Mappers.getMapper(IProductMapper.class);
+    @Spy
+    private IProductCategoryMapper categoryMapper = IProductCategoryMapper.INSTANCE;
+
+    @BeforeEach
+    public void setup(){
+        ReflectionTestUtils.setField(mapper, "iProductCategoryMapper", categoryMapper);
+    }
 
     @Test
     void create() {
