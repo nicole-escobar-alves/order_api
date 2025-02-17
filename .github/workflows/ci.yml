@@ -10,14 +10,6 @@ jobs:
     name: Build and analyze
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:latest
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: gestaopedidos
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -61,11 +53,7 @@ jobs:
           
           docker-compose -f docker-compose.yml up -d
 
-      - name: Install Maven
-        run: sudo apt-get install maven
-
       - name: Run BDD test
         run: |
           mvn test
-        #cd src/test/java/br/com/postech/techchallenge/bddTests
       
