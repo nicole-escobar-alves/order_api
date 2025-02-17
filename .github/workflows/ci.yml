@@ -66,6 +66,6 @@ jobs:
 
       - name: Run BDD test
         run: |
-          cd src/test/java/br/com/postech/techchallenge/bddTests
           mvn test
+        #cd src/test/java/br/com/postech/techchallenge/bddTests
       
