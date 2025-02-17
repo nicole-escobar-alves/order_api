@@ -61,18 +61,11 @@ jobs:
           
           docker-compose -f docker-compose.yml up -d
 
-
-      #- name: Wait for PostgreSQL to be ready
-       # run: |
-        #  ./wait-for-it.sh postgres:5432 --timeout=30 --strict -- echo "PostgreSQL is up"
-
-      #- name: Check Docker logs
-       # run: |
-        #  docker-compose logs api
-         # docker-compose logs postgres
+      - name: Install Maven
+        run: sudo apt-get install maven
 
       - name: Run BDD test
         run: |
-          cd test/br.com.postech.techchallenge/bddTests
+          cd test\java\br\com\postech\techchallenge\bddTests
           mvn test
       
