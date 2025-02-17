@@ -15,7 +15,7 @@ import java.time.Duration;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "producties")
+@Table(name = "products")
 public class Product extends BaseDomain {
 
     @Column(nullable = false)
