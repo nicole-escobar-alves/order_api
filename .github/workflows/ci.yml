@@ -27,6 +27,13 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
+      #Subir docker compose para testes de BDD
+      - name: Start infrastructure with Docker Compose
+        run: docker-compose up -d
+
+      - name: Wait for application to start
+        run: sleep 30 # Aguarde a aplicação subir
+
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -44,3 +51,8 @@ jobs:
           -Dsonar.exclusions=**/*.json,**/*.xml \
           -Dsonar.qualitygate.wait=true \
           -Dactive.profile=test
+
+      # Garante que a infra seja stopada após os testes
+      - name: Stop infrastructure
+        if: always()
+        run: docker-compose down

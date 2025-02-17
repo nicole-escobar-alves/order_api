@@ -7,7 +7,7 @@ services:
     depends_on:
       - db
     ports:
-      - 8082:8080
+      - 8080:8080
     environment:
       DB_HOST: db
       DB_PORT: 5432
@@ -32,12 +32,12 @@ services:
     ports:
       - '5433:5432'
 
-  pagamento:
-    image: gestaopedidospayment  # Nome da imagem já buildada
-    container_name: payment-service
-    ports:
-      - "8080:8080"
-      - "8081:8081"
-    environment:
-      MongoConnectionString: string-mongo
-      WebHookUrl: http://gestaopedidos:8080/order/makePayment
+#  pagamento:
+#    image: gestaopedidospayment  # Nome da imagem já buildada
+#    container_name: payment-service
+#    ports:
+#      - "8080:8080"
+#      - "8081:8081"
+#    environment:
+#      MongoConnectionString: string-mongo
+#      WebHookUrl: http://gestaopedidos:8080/order/makePayment
