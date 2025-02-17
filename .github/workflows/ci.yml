@@ -54,11 +54,11 @@ jobs:
           -Dsonar.qualitygate.wait=true \
           -Dactive.profile=test
 
-      - name: Wait for services
-        run: sleep 20
-        
       - name: Set up Docker Compose
         run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+          
           docker-compose -f docker-compose.yml up -d
 
       - name: Wait for PostgreSQL to be ready
