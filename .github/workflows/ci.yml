@@ -12,13 +12,15 @@ jobs:
 
     services:
       postgres:
-        image: postgres:13
+        image: postgres:latest
         env:
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
-        options: --health-cmd "pg_isready -U postgres" --health-interval 10s --health-timeout 5s --health-retries 3
+          POSTGRES_DB: gestaopedidos
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
@@ -52,12 +54,13 @@ jobs:
           -Dsonar.qualitygate.wait=true \
           -Dactive.profile=test
 
-      - name: Start application
-        run: mvn spring-boot:run &
+      - name: Set up Docker Compose
+        run: |
+          docker-compose -f docker-compose.yml up -d
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          docker-compose exec -T postgres pg_isready -U example
 
-      - name: Wait application already
-        run:
-          sleep 30 
-
-      - name: BDD test
-        run: mvn test
+      - name: Run BDD test
+        run: | 
+          ./run_tests.sh
