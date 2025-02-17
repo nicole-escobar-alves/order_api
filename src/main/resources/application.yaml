@@ -8,10 +8,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-logging:
-  level:
-    root: ERROR
-    org.springframework: ERROR
+#logging:
+#  level:
+#    root: ERROR
+#    org.springframework: ERROR
 # OpenApi
 springdoc:
   api-docs:

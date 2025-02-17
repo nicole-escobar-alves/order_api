@@ -2,17 +2,15 @@ spring:
   application:
     name: order_api
   datasource:
-    url: jdbc:h2:mem:gestaopedidos
-    username: sa
-    password: password
-    driverClassName: org.h2.Driver
+    url: jdbc:tc:postgresql:15://localhost/testdb
+    username: testuser
+    password: testpass
+    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
   jpa:
     hibernate:
       ddl-auto: create
     database-platform: org.hibernate.dialect.H2Dialect
-  h2:
-    console:
-      enabled: true
+
 # OpenApi
 springdoc:
   api-docs:
