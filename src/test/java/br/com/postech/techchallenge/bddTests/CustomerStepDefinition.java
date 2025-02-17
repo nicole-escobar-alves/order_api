@@ -17,7 +17,7 @@ public class CustomerStepDefinition {
     private final String ENDPOINT_API_CUSTOMER = "http://localhost:8080/customer";
     @Given("that I want to register a new customer into database")
     public void thatIWantToRegisterANewCustomerIntoDatabase() {
-        customerDto = new CreateCustomerDto("Customer", "cpf2", "email");
+        customerDto = new CreateCustomerDto("Customer", "cpf", "email");
     }
     @When("creating a new customer")
     public void creatingANewCustomer() {
