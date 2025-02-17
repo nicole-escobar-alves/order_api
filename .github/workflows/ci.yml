@@ -9,6 +9,14 @@ jobs:
   build:
     name: Build and analyze
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        options: --health-cmd "pg_isready -U postgres" --health-interval 10s --health-timeout 5s --health-retries 3
     steps:
       - uses: actions/checkout@v4
         with:
@@ -46,7 +54,11 @@ jobs:
 
       - name: Start application
         run: mvn spring-boot:run &
+
       - name: Wait application already
-        run: sleep 30 curl - http://localhost:8080/helth
+        run:
+          sleep 30 
+          curl -f http://localhost:8080/helth
+        
       - name: BDD test
         run: mvn test
