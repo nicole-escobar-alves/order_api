@@ -44,5 +44,9 @@ jobs:
           -Dsonar.qualitygate.wait=true \
           -Dactive.profile=test
 
+      - name: Start application
+        run: mvn spring-boot:run &
+      - name: Wait application already
+        run: sleep 30 curl - http://localhost:8080/helth
       - name: BDD test
         run: mvn test
