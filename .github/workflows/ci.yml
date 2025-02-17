@@ -74,5 +74,5 @@ jobs:
       - name: Run BDD test
         run: |
           cd test/br.com.postech.techchallenge/bddTests
-          ./run_tests.sh
+          mvn test
       
