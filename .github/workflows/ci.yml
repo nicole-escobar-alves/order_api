@@ -63,7 +63,7 @@ jobs:
 
       - name: Wait for PostgreSQL to be ready
         run: |
-          docker-compose exec -T postgres pg_isready -U example
+          ./wait-for-it.sh postgres:5432 --timeout=30 --strict -- echo "PostgreSQL is up"
 
       - name: Check Docker logs
         run: |
