@@ -9,4 +9,6 @@ data:
   DB_USER: postgres
   DB_PASSWORD: secret
   PAYMENT_NAME: Payment-Api
-  PAYMENT_URL: http://gestaopedidospayment-service:80/api
+  PAYMENT_URL: http://a5c8c2c70e3c749eb825cdcfbd851b10-8e40dfc9bf2c8362.elb.us-east-1.amazonaws.com:8080/api
+  PRODUCTION_NAME: Production-Api
+  PRODUCTION_URL: http://gestaopedidosproduction-service:80/api

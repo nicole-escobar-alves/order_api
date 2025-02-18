@@ -33,13 +33,3 @@ services:
       POSTGRES_DB: gestaopedidos
     ports:
       - '5433:5432'
-
-  pagamento:
-    image: gestaopedidospayment:latest  # Nome da imagem já buildada
-    container_name: payment-service
-    ports:
-      - "8080:8080"
-      - "8081:8081"
-    environment:
-      MongoConnectionString: mongodb+srv://hugovictorlima16:6dN4V87oG5oknPSZ@cluster0.xebob.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-      WebHookUrl: http://gestaopedidos:8080/order/makePayment

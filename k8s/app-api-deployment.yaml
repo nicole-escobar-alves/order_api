@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: gestaopedidos
-          image: gestaopedidos:latest # Imagem local
-          imagePullPolicy: Never # Força o kubernets a não puxar de um repositório remoto
+          image: 264945224125.dkr.ecr.us-east-1.amazonaws.com/gestaopedidos_repository:latest # Imagem local
+#          imagePullPolicy: Never # Força o kubernets a não puxar de um repositório remoto
           ports:
             - containerPort: 8080
           envFrom:
