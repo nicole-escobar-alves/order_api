@@ -1,6 +1,7 @@
 package br.com.postech.techchallenge.orderapi.mapper;
 
 import br.com.postech.techchallenge.orderapi.dto.order.CreateOrderPaymentDto;
+import br.com.postech.techchallenge.orderapi.dto.order.CreateOrderProductionDto;
 import br.com.postech.techchallenge.orderapi.dto.order.DetailsOrderDto;
 import br.com.postech.techchallenge.orderapi.dto.order.OrderDto;
 import br.com.postech.techchallenge.orderapi.models.Order;
@@ -23,4 +24,5 @@ public interface IOrderMapper {
     @Mapping(target = "orderId",source = "id")
     @Mapping(target = "amount",source = "totalPrice")
     CreateOrderPaymentDto toCreateOrderPaymentDto(Order order);
+
 }

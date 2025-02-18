@@ -14,24 +14,13 @@ spec:
     spec:
       containers:
         - name: gestaopedidos
-          image: 103531044887.dkr.ecr.us-east-1.amazonaws.com/tech_challenge_repository:latest
+          image: gestaopedidos:latest # Imagem local
+          imagePullPolicy: Never # Força o kubernets a não puxar de um repositório remoto
           ports:
             - containerPort: 8080
-          env:
-            - name: DB_HOST
-              value: db-service
-            - name: DB_PORT
-              value: "5432"
-            - name: DB_NAME
-              value: gestaopedidos
-            - name: DB_USER
-              value: postgres
-            - name: DB_PASSWORD
-              value: secret
-            - name: PAYMENT_NAME
-              value: Payment-Api
-            - name: PAYMENT_URL
-              value: https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1
+          envFrom:
+            - configMapRef:
+                name: gestaopedidos-config
           resources:
             requests:
               cpu: "100m"

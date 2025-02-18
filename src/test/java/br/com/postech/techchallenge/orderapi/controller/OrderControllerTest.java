@@ -4,6 +4,7 @@ package br.com.postech.techchallenge.orderapi.controller;
 import br.com.postech.techchallenge.orderapi.dto.order.CreateOrderDto;
 import br.com.postech.techchallenge.orderapi.dto.order.DetailsOrderDto;
 import br.com.postech.techchallenge.orderapi.dto.order.OrderDto;
+import br.com.postech.techchallenge.orderapi.dto.order.UpdateStatusOrderDto;
 import br.com.postech.techchallenge.orderapi.enums.OrderStatus;
 import br.com.postech.techchallenge.orderapi.exception.EntityNotFoundException;
 import br.com.postech.techchallenge.orderapi.service.internal.OrderService;
@@ -87,7 +88,7 @@ class OrderControllerTest {
 
     @Test
     void updateStatus() throws EntityNotFoundException {
-        var result = orderController.updateStatus(1L, OrderStatus.RECEIVED);
+        var result = orderController.updateStatus(1L, new UpdateStatusOrderDto(OrderStatus.RECEIVED));
 
         assertAll(
                 ()-> assertEquals(HttpStatus.OK, result.getStatusCode())

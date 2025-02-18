@@ -1,9 +1,11 @@
 package br.com.postech.techchallenge.orderapi.mapper;
 
 import br.com.postech.techchallenge.orderapi.dto.addon.AddonDto;
+import br.com.postech.techchallenge.orderapi.dto.addon.AddonProductionDto;
 import br.com.postech.techchallenge.orderapi.dto.addon.CreateAddonDto;
 import br.com.postech.techchallenge.orderapi.models.Addon;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -15,4 +17,5 @@ public interface IAddonMapper{
     Addon toAddon(CreateAddonDto dto);
 
     List<AddonDto> toAddonListDto(List<Addon> domains);
+
 }

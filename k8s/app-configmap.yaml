@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gestaopedidos-config
+data:
+  DB_HOST: db-service
+  DB_PORT: "5432"
+  DB_NAME: gestaopedidos
+  DB_USER: postgres
+  DB_PASSWORD: secret
+  PAYMENT_NAME: Payment-Api
+  PAYMENT_URL: http://gestaopedidospayment-service:80/api

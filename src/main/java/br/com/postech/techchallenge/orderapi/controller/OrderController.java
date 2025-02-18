@@ -3,6 +3,7 @@ package br.com.postech.techchallenge.orderapi.controller;
 import br.com.postech.techchallenge.orderapi.dto.order.CreateOrderDto;
 import br.com.postech.techchallenge.orderapi.dto.order.DetailsOrderDto;
 import br.com.postech.techchallenge.orderapi.dto.order.OrderDto;
+import br.com.postech.techchallenge.orderapi.dto.order.UpdateStatusOrderDto;
 import br.com.postech.techchallenge.orderapi.enums.OrderStatus;
 import br.com.postech.techchallenge.orderapi.exception.EntityNotFoundException;
 import br.com.postech.techchallenge.orderapi.service.internal.OrderService;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -46,8 +48,8 @@ public class OrderController {
     }
 
     @PutMapping("/updateStatus/{id}")
-    public ResponseEntity<OrderDto> updateStatus(@PathVariable("id") Long id, @RequestBody() OrderStatus orderStatus) throws EntityNotFoundException {
-        orderService.updateStatus(id, orderStatus);
+    public ResponseEntity<OrderDto> updateStatus(@PathVariable("id") Long id, @RequestBody() UpdateStatusOrderDto updateStatusOrderDto) throws EntityNotFoundException {
+        orderService.updateStatus(id, updateStatusOrderDto.getOrderStatus());
         return ResponseEntity.status(HttpStatus.OK.value()).build();
     }
 
