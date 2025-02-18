@@ -19,6 +19,8 @@ ENV DB_USER =""
 ENV DB_PASSWORD =""
 ENV PAYMENT_NAME =""
 ENV PAYMENT_URL =""
+ENV PRODUCTION_NAME =""
+ENV PRODUCTION_URL =""
 
 WORKDIR /app
 COPY --from=builder ./app/target/*.jar app.jar
@@ -28,6 +30,8 @@ ENTRYPOINT ["java", "-jar", "/app/app.jar",\
     "--spring.datasource.username=${DB_USER}",\
     "--spring.datasource.password=${DB_PASSWORD}",\
     "--payment-service.name=${PAYMENT_NAME}",\
-    "--payment-service.url=${PAYMENT_URL}"]
+    "--payment-service.url=${PAYMENT_URL}",\
+    "--production-service.name=${PRODUCTION_NAME}",\
+    "--production-service.url=${PRODUCTION_URL}"]
 
 EXPOSE 8080

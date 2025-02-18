@@ -2,6 +2,7 @@ package br.com.postech.techchallenge.orderapi.service.internal;
 
 import br.com.postech.techchallenge.orderapi.dto.combo.CreateComboDto;
 import br.com.postech.techchallenge.orderapi.dto.order.CreateOrderDto;
+import br.com.postech.techchallenge.orderapi.dto.order.CreateOrderProductionDto;
 import br.com.postech.techchallenge.orderapi.dto.order.DetailsOrderDto;
 import br.com.postech.techchallenge.orderapi.enums.OrderStatus;
 import br.com.postech.techchallenge.orderapi.enums.ProductCategory;
@@ -153,7 +154,7 @@ class OrderServiceTest {
         orderService.makePayment(1L);
 
         verify(orderRepository, times(1)).save(any(Order.class));
-        verify(productionApiService, times(1)).create(any(DetailsOrderDto.class));
+        verify(productionApiService, times(1)).create(any(CreateOrderProductionDto.class));
     }
 
 

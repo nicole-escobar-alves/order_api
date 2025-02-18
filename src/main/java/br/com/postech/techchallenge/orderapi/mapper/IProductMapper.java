@@ -2,6 +2,7 @@ package br.com.postech.techchallenge.orderapi.mapper;
 
 import br.com.postech.techchallenge.orderapi.dto.product.CreateProductDto;
 import br.com.postech.techchallenge.orderapi.dto.product.ProductDto;
+import br.com.postech.techchallenge.orderapi.dto.product.ProductProductionDto;
 import br.com.postech.techchallenge.orderapi.models.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -20,5 +21,8 @@ public interface IProductMapper {
 
     List<ProductDto> toProductListDto(List<Product> products);
 
+    @Mapping(target = "estimated_time", source = "estimatedTime")
+    @Mapping(target = "product_category", source = "productCategory")
+    ProductProductionDto toProductProductionDto(Product product);
 
 }

@@ -2,6 +2,7 @@ package br.com.postech.techchallenge.orderapi.service.internal;
 
 import br.com.postech.techchallenge.orderapi.dto.combo.CreateComboDto;
 import br.com.postech.techchallenge.orderapi.dto.order.CreateOrderDto;
+import br.com.postech.techchallenge.orderapi.dto.order.CreateOrderProductionDto;
 import br.com.postech.techchallenge.orderapi.dto.order.DetailsOrderDto;
 import br.com.postech.techchallenge.orderapi.dto.order.OrderDto;
 import br.com.postech.techchallenge.orderapi.enums.OrderStatus;
@@ -15,6 +16,8 @@ import br.com.postech.techchallenge.orderapi.models.Order;
 import br.com.postech.techchallenge.orderapi.service.external.IProductionApiService;
 import br.com.postech.techchallenge.orderapi.service.external.IPaymentApiService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +26,7 @@ import java.util.List;
 @Service
 public class OrderService {
 
+    private static final Logger log = LoggerFactory.getLogger(OrderService.class);
     private final IOrderJpaRepository orderRepository;
     private final IOrderMapper orderMapper;
     private final ComboService comboService;
@@ -91,8 +95,11 @@ public class OrderService {
         Order order = orderRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("The order was not found."));
         order.updateOrderStatus(OrderStatus.RECEIVED);
         var orderSaved = orderRepository.save(order);
-
-        productionApiService.create(orderMapper.toDetailsOrderDto(orderSaved));
+        log.info("Pagamento confirmado do Order de id:"+orderSaved.getId());
+//        var createProductionDto = orderMapper.toCreateOrderProductionDto(orderSaved);
+        var createProductionDto = new CreateOrderProductionDto(orderSaved);
+        log.info("Criando OrderProductionDto:"+createProductionDto);
+        productionApiService.create(createProductionDto);
     }
 
     private void addCustomerInOrder(Order order, CreateOrderDto createOrderDto) throws EntityNotFoundException {

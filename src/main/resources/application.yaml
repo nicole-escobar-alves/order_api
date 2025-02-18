@@ -24,8 +24,8 @@ springdoc:
 
 payment-service:
   name: Payment-Api
-  url: https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1
+  url: http://localhost:8080/api
 
 production-service:
     name: Production-Api
-    url: https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1
+    url: http://localhost:8000/api
