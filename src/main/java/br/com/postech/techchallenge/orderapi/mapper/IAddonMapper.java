@@ -18,7 +18,4 @@ public interface IAddonMapper{
 
     List<AddonDto> toAddonListDto(List<Addon> domains);
 
-    @Mapping(target = "discount_percent", source = "discountPercent")
-    @Mapping(target = "product_category", source = "productCategory")
-    AddonProductionDto toAddonProductionDto(Addon addon);
 }
