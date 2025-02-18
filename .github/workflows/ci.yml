@@ -50,7 +50,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y docker-compose
-          
           docker-compose -f docker-compose.yml up -d
 
       - name: Run BDD test
