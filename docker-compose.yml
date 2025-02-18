@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   gestaopedidos:
-    image: gestaopedidos:latest
+    image: gestaopedidos
     build: .
     depends_on:
       - db
