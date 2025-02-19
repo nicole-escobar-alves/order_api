@@ -28,6 +28,14 @@ Validação da build da aplicação e a qualidade do cógico com Sonarqube.
 
 [<img src="images/sonarCoverage.jpg" width="764" height="248"/>]
 
+BDD Tests
+
+[<img src="images/bddTest.jpg" width="764" height="248"/>]
+
+Unit Tests
+
+[<img src="images/unitTest.jpg" width="764" height="248"/>]
+
 ## 🏁 Comece por aqui <a name = "getting_started"></a>
 
 Comandos para rodar a API na máquina local para fins de desenvolvimento e teste.
